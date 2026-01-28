@@ -1,0 +1,2260 @@
+# Aerra - Сублимационная Печать (Мультистраничный Сайт)
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aerra - Сублимационная печать на кружках, футболках и сувенирах</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #2a9d8f;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            margin-right: 8px;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+        }
+        
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 80px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(29, 53, 87, 0.85) 0%, rgba(230, 57, 70, 0.85) 100%), url('https://placehold.co/1920x1080/1d3557/e63946?text=Сублимационная+печать') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            margin-bottom: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border-color: white;
+            color: white;
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 450px;
+            background: url('https://placehold.co/600x450/1d3557/white?text=Наше+производство') center/cover no-repeat;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-mugs { background-image: url('https://placehold.co/600x400/e63946/white?text=Печать+на+кружках'); }
+        .service-tshirts { background-image: url('https://placehold.co/600x400/4cc9f0/white?text=Печать+на+футболках'); }
+        .service-souvenirs { background-image: url('https://placehold.co/600x400/2a9d8f/white?text=Печать+на+сувенирах'); }
+        .service-wholesale { background-image: url('https://placehold.co/600x400/f72585/white?text=Оптовые+продажи'); }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        /* Products Section */
+        .products-section {
+            background-color: white;
+            padding: 80px 0;
+            margin: 60px 0;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .product-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--light);
+            transition: var(--transition);
+        }
+        
+        .product-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+            background: white;
+        }
+        
+        .product-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .product-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+        
+        /* Prices Section */
+        .prices-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .price-category {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-category:last-child {
+            border-bottom: none;
+        }
+        
+        .price-category h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .price-table th {
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .price-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .price-table tr:hover td {
+            background-color: #f8f9fa;
+        }
+        
+        /* Contacts Section */
+        .contacts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+        
+        .contact-info h3 {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            min-width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-text p, .contact-text a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+        
+        .map-placeholder {
+            height: 300px;
+            background: linear-gradient(45deg, var(--secondary) 0%, var(--accent) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #c12939;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        .form-success {
+            background: var(--success);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-col h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            margin-bottom: 15px;
+            opacity: 0.85;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* Working Hours */
+        .working-hours {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .working-hours p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .working-hours span {
+            font-weight: 600;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-item {
+                margin: 10px 0;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+            
+            .hero {
+                padding: 90px 20px 100px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.15rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 12px 0;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .price-table {
+                font-size: 0.9rem;
+            }
+            
+            .price-table th, .price-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">✦</span>
+                AERR<span>a</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+            <nav>
+                <ul id="main-menu">
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li><a href="#about" class="nav-link">О нас</a></li>
+                    <li><a href="#services" class="nav-link">Услуги</a></li>
+                    <li><a href="#prices" class="nav-link">Цены</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1>Сублимационная печать премиум-класса</h1>
+                <p>Более 15 лет создаем яркие принты на кружках, футболках и сувенирах для крупнейших компаний России</p>
+                <a href="#contacts" class="btn">Оставить заявку</a>
+                <a href="#services" class="btn btn-secondary">Наши услуги</a>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему выбирают нас</h2>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">лет на рынке</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10 000+</div>
+                    <div class="stat-label">довольных клиентов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">партнеров по России</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24ч</div>
+                    <div class="stat-label">срок изготовления</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>О компании Aerra</h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Надежный партнер в сфере сублимационной печати с 2009 года</h2>
+                    <p>Компания Aerra специализируется на сублимационной печати на кружках, футболках и различных сувенирах. Мы работаем как с розничными клиентами, так и с крупными оптовыми заказчиками по всей России.</p>
+                    <p>Наше производство оснащено современным оборудованием последнего поколения, что позволяет нам обеспечивать высочайшее качество печати и оперативные сроки выполнения заказов.</p>
+                    <p>За 15+ лет работы мы зарекомендовали себя как надежный поставщик продукции с сублимационной печатью для сотен компаний и предпринимателей по всей России.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">гарантия качества</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24ч</div>
+                            <div class="stat-label">максимальный срок изготовления</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">видов продукции</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image"></div>
+            </div>
+            
+            <div class="products-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Что мы предлагаем</h2>
+                    </div>
+                    
+                    <div class="products-grid">
+                        <div class="product-item">
+                            <div class="product-icon">👕</div>
+                            <div class="product-name">Футболки оптом</div>
+                            <p>Качественные футболки от ведущих производителей по оптовым ценам</p>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-icon">☕</div>
+                            <div class="product-name">Кружки сублимационные</div>
+                            <p>Керамические кружки с ярким и долговечным принтом</p>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-icon">🔑</div>
+                            <div class="product-name">Брелки и сувениры</div>
+                            <p>Широкий ассортимент сувенирной продукции для нанесения логотипов</p>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-icon">📄</div>
+                            <div class="product-name">Сублимационная бумага</div>
+                            <p>Профессиональные расходные материалы для сублимационной печати</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img service-mugs"></div>
+                    <div class="service-content">
+                        <h3>Печать на кружках</h3>
+                        <p>Создаем яркие и долговечные принты на керамических кружках любого объема. Идеально подходят для корпоративных подарков, рекламной продукции и личного использования.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img service-tshirts"></div>
+                    <div class="service-content">
+                        <h3>П
+# Aerra - Сублимационная Печать (Мультистраничный Сайт)
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aerra - Сублимационная печать на кружках, футболках и сувенирах</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #2a9d8f;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            margin-right: 8px;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+        }
+        
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 80px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(29, 53, 87, 0.85) 0%, rgba(230, 57, 70, 0.85) 100%), url('https://placehold.co/1920x1080/1d3557/e63946?text=Сублимационная+печать') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            margin-bottom: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border-color: white;
+            color: white;
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 450px;
+            background: url('https://placehold.co/600x450/1d3557/white?text=Наше+производство') center/cover no-repeat;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-mugs { background-image: url('https://placehold.co/600x400/e63946/white?text=Печать+на+кружках'); }
+        .service-tshirts { background-image: url('https://placehold.co/600x400/4cc9f0/white?text=Печать+на+футболках'); }
+        .service-souvenirs { background-image: url('https://placehold.co/600x400/2a9d8f/white?text=Печать+на+сувенирах'); }
+        .service-wholesale { background-image: url('https://placehold.co/600x400/f72585/white?text=Оптовые+продажи'); }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        /* Products Section */
+        .products-section {
+            background-color: white;
+            padding: 80px 0;
+            margin: 60px 0;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .product-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--light);
+            transition: var(--transition);
+        }
+        
+        .product-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+            background: white;
+        }
+        
+        .product-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .product-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+        
+        /* Prices Section */
+        .prices-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-top: 30px;
+        }
+        
+        .price-category {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-category:last-child {
+            border-bottom: none;
+        }
+        
+        .price-category h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .price-table th {
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .price-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .price-table tr:hover td {
+            background-color: #f8f9fa;
+        }
+        
+        /* Contacts Section */
+        .contacts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+        
+        .contact-info h3 {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            min-width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-text p, .contact-text a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+        
+        .map-placeholder {
+            height: 300px;
+            background: linear-gradient(45deg, var(--secondary) 0%, var(--accent) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #c12939;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        .form-success {
+            background: var(--success);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-col h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            margin-bottom: 15px;
+            opacity: 0.85;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* Working Hours */
+        .working-hours {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .working-hours p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .working-hours span {
+            font-weight: 600;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-item {
+                margin: 10px 0;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+            
+            .hero {
+                padding: 90px 20px 100px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.15rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 12px 0;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .price-table {
+                font-size: 0.9rem;
+            }
+            
+            .price-table th, .price-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">✦</span>
+                AERR<span>a</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+            <nav>
+                <ul id="main-menu">
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li><a href="#about" class="nav-link">О нас</a></li>
+                    <li><a href="#services" class="nav-link">Услуги</a></li>
+                    <li><a href="#prices" class="nav-link">Цены</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1>Сублимационная печать премиум-класса</h1>
+                <p>Более 15 лет создаем яркие принты на кружках, футболках и сувенирах для крупнейших компаний России</p>
+                <a href="#contacts" class="btn">Оставить заявку</a>
+                <a href="#services" class="btn btn-secondary">Наши услуги</a>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему выбирают нас</h2>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">лет на рынке</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10 000+</div>
+                    <div class="stat-label">довольных клиентов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">партнеров по России</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24ч</div>
+                    <div class="stat-label">срок изготовления</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>О компании Aerra</h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Надежный партнер в сфере сублимационной печати с 2009 года</h2>
+                    <p>Компания Aerra специализируется на сублимационной печати на кружках, футболках и различных сувенирах. Мы работаем как с розничными клиентами, так и с крупными оптовыми заказчиками по всей России.</p>
+                    <p>Наше производство оснащено современным оборудованием последнего поколения, что позволяет нам обеспечивать высочайшее качество печати и оперативные сроки выполнения заказов.</p>
+                    <p>За 15+ лет работы мы зарекомендовали себя как надежный поставщик продукции с сублимационной печатью для сотен компаний и предпринимателей по всей России.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">гарантия качества</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24ч</div>
+                            <div class="stat-label">максимальный срок изготовления</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">видов продукции</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image"></div>
+            </div>
+            
+            <div class="products-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Что мы предлагаем</h2>
+                    </div>
+                    
+                    <div class="products-grid">
+                        <div class="product-item">
+                            <div class="product-icon">👕</div>
+                            <div class="product-name">Футболки оптом</div>
+                            <p>Качественные футболки от ведущих производителей по оптовым ценам</p>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-icon">☕</div>
+                            <div class="product-name">Кружки сублимационные</div>
+                            <p>Керамические кружки с ярким и долговечным принтом</p>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-icon">🔑</div>
+                            <div class="product-name">Брелки и сувениры</div>
+                            <p>Широкий ассортимент сувенирной продукции для нанесения логотипов</p>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-icon">📄</div>
+                            <div class="product-name">Сублимационная бумага</div>
+                            <p>Профессиональные расходные материалы для сублимационной печати</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img service-mugs"></div>
+                    <div class="service-content">
+                        <h3>Печать на кружках</h3>
+                        <p>Создаем яркие и долговечные принты на керамических кружках любого объема. Идеально подходят для корпоративных подарков, рекламной продукции и личного использования.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img service-tshirts"></div>
+                    <div class="service-content">
+                        <h3>Печать на футболках</h3>
+                        <p>Наносим полноцветные изображения на футболки из синтетических тканей. Принты не выцветают и не трескаются даже после многочисленных стирок.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img service-souvenirs"></div>
+                    <div class="service-content">
+                        <h3>Печать на сувенирах</h3>
+                        <p>Изготавливаем рекламную и сувенирную продукцию с вашим логотипом: подушки, сумки, зеркала, часы и многое другое.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img service-wholesale"></div>
+                    <div class="service-content">
+                        <h3>Оптовые продажи</h3>
+                        <p>Предлагаем выгодные условия для оптовых покупателей: футболки, кружки, брелки, сублимационную бумагу и другую продукцию по самым низким ценам в Перми.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <h2>Как мы работаем</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center; padding: 30px;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px;">1</div>
+                        <h3>Заявка</h3>
+                        <p>Оставляете заявку на сайте или звоните нам. Мы обсуждаем детали заказа и просчитываем стоимость.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center; padding: 30px;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px;">2</div>
+                        <h3>Макет</h3>
+                        <p>Наш дизайнер бесплатно создает макет изделия или адаптирует ваш готовый дизайн для печати.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center; padding: 30px;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px;">3</div>
+                        <h3>Производство</h3>
+                        <p>Изготавливаем заказ на профессиональном оборудовании с соблюдением всех технологических процессов.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-content" style="text-align: center; padding: 30px;">
+                        <div style="font-size: 3.5rem; margin-bottom: 20px;">4</div>
+                        <h3>Доставка</h3>
+                        <p>Доставляем готовый заказ по Перми бесплатно или отправляем транспортной компанией в любой регион России.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Page -->
+    <section id="prices" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Прайс-лист</h2>
+            </div>
+            
+            <div class="prices-container">
+                <div class="price-category">
+                    <h3>Печать на кружках</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Тип кружки</th>
+                                <th>Цена за 1 шт. (от 10 шт.)</th>
+                                <th>Цена за 1 шт. (от 50 шт.)</th>
+                                <th>Цена за 1 шт. (от 100 шт.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Классическая белая (330 мл)</td>
+                                <td>195 ₽</td>
+                                <td>175 ₽</td>
+                                <td>155 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Керамическая цветная (330 мл)</td>
+                                <td>245 ₽</td>
+                                <td>220 ₽</td>
+                                <td>195 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Двустенная (400 мл)</td>
+                                <td>320 ₽</td>
+                                <td>290 ₽</td>
+                                <td>260 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Кружка-термос (450 мл)</td>
+                                <td>490 ₽</td>
+                                <td>450 ₽</td>
+                                <td>410 ₽</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="price-category">
+                    <h3>Печать на футболках</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Тип футболки</th>
+                                <th>Цена за 1 шт. (от 5 шт.)</th>
+                                <th>Цена за 1 шт. (от 20 шт.)</th>
+                                <th>Цена за 1 шт. (от 50 шт.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Футболка мужская (100% хлопок)</td>
+                                <td>590 ₽</td>
+                                <td>540 ₽</td>
+                                <td>490 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Футболка унисекс (полиэстер)</td>
+                                <td>450 ₽</td>
+                                <td>410 ₽</td>
+                                <td>370 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Детская футболка</td>
+                                <td>390 ₽</td>
+                                <td>360 ₽</td>
+                                <td>330 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Худи / Толстовка</td>
+                                <td>1 290 ₽</td>
+                                <td>1 190 ₽</td>
+                                <td>1 090 ₽</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="price-category">
+                    <h3>Оптовые продажи основы</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th>Цена за 1 шт. (от 20 шт.)</th>
+                                <th>Цена за 1 шт. (от 50 шт.)</th>
+                                <th>Цена за 1 шт. (от 100 шт.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Футболка мужская (белая)</td>
+                                <td>290 ₽</td>
+                                <td>260 ₽</td>
+                                <td>230 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Кружка белая (330 мл)</td>
+                                <td>85 ₽</td>
+                                <td>75 ₽</td>
+                                <td>65 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Брелок-кристалл (55мм)</td>
+                                <td>45 ₽</td>
+                                <td>40 ₽</td>
+                                <td>35 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Сублимационная бумага (А4)</td>
+                                <td>5.50 ₽</td>
+                                <td>5.00 ₽</td>
+                                <td>4.50 ₽</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="price-category">
+                    <h3>Дополнительные услуги</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Услуга</th>
+                                <th>Цена</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Дизайн макета (1 вариант)</td>
+                                <td>500 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Срочное изготовление (до 4 часов)</td>
+                                <td>+50% к стоимости заказа</td>
+                            </tr>
+                            <tr>
+                                <td>Доставка по Перми</td>
+                                <td>Бесплатно от 3000 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Упаковка в подарочную коробку</td>
+                                <td>70 ₽ за единицу</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">Минимальная сумма заказа: 2000 ₽</p>
+                <p style="font-size: 1.1rem; margin-bottom: 30px;">Для постоянных клиентов и крупных заказов действует система скидок до 25%</p>
+                <a href="#contacts" class="btn" style="padding: 12px 45px; font-size: 1.2rem;">Рассчитать стоимость заказа</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Page -->
+    <section id="contacts" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+            </div>
+            
+            <div class="contacts-container">
+                <div class="contact-info">
+                    <h3>Наш адрес и режим работы</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <h4>Адрес</h4>
+                            <p>г. Пермь, ул. Героев Хасана, 21</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div class="contact-text">
+                            <h4>Режим работы</h4>
+                            <div class="working-hours">
+                                <p><span>Пн-Чт:</span> 10:00 - 18:00</p>
+                                <p><span>Пт:</span> 10:00 - 15:00</p>
+                                <p><span>Сб-Вс:</span> выходной</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <h4>Телефон</h4>
+                            <p><a href="tel:+73422123456">+7 (342) 212-34-56</a></p>
+                            <p><a href="tel:+79121234567">+7 (912) 123-45-67</a> (WhatsApp)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@aerra-print.ru">info@aerra-print.ru</a></p>
+                            <p><a href="mailto:sales@aerra-print.ru">sales@aerra-print.ru</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="map-placeholder">
+                        <div>Карта проезда будет добавлена позже</div>
+                        <div style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9;">В настоящее время вы можете найти нас на Яндекс.Картах по адресу: г. Пермь, ул. Героев Хасана, 21</div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="text-align: center; margin-bottom: 25px; color: var(--secondary);">Оставить заявку</h3>
+                    <p style="text-align: center; margin-bottom: 30px; color: var(--gray);">Наши менеджеры свяжутся с вами в течение 15 минут</p>
+                    
+                    <form id="request-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" class="form-control" required placeholder="+7 (___) ___-__-__">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="product">Интересующий товар/услуга *</label>
+                            <select id="product" class="form-control" required>
+                                <option value="">Выберите вариант</option>
+                                <option value="mugs">Печать на кружках</option>
+                                <option value="tshirts">Печать на футболках</option>
+                                <option value="souvenirs">Печать на сувенирах</option>
+                                <option value="wholesale">Оптовые закупки</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Комментарий</label>
+                            <textarea id="message" class="form-control" placeholder="Расскажите подробнее о вашем заказе"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Отправить заявку</button>
+                        <div class="form-success" id="form-success">
+                            Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Aerra Print</h3>
+                    <p>Профессиональная сублимационная печать на кружках, футболках и сувенирах более 15 лет. Качество, надежность и индивидуальный подход к каждому клиенту.</p>
+                    <div class="working-hours" style="margin-top: 20px; background: rgba(76, 201, 240, 0.15);">
+                        <p><span>Пн-Чт:</span> 10:00 - 18:00</p>
+                        <p><span>Пт:</span> 10:00 - 15:00</p>
+                        <p><span>Сб-Вс:</span> выходной</p>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">Главная</a></li>
+                        <li><a href="#about" class="footer-link">О нас</a></li>
+                        <li><a href="#services" class="footer-link">Услуги</a></li>
+                        <li><a href="#prices" class="footer-link">Цены</a></li>
+                        <li><a href="#contacts" class="footer-link">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Услуги</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Печать на кружках</a></li>
+                        <li><a href="#services">Печать на футболках</a></li>
+                        <li><a href="#services">Печать на сувенирах</a></li>
+                        <li><a href="#services">Оптовые продажи</a></li>
+                        <li><a href="#prices">Прайс-лист</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li>г. Пермь, ул. Героев Хасана, 21</li>
+                        <li><a href="tel:+73422123456">+7 (342) 212-34-56</a></li>
+                        <li><a href="tel:+79121234567">+7 (912) 123-45-67</a></li>
+                        <li><a href="mailto:info@aerra-print.ru">info@aerra-print.ru</a></li>
+                    </ul>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; color: white; text-align: center; line-height: 40px; transition: var(--transition);">t</a>
+                        <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; color: white; text-align: center; line-height: 40px; transition: var(--transition);">w</a>
+                        <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; color: white; text-align: center; line-height: 40px; transition: var(--transition);">vk</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2009-2026 Aerra Print. Все права защищены. Сублимационная печать в Перми более 15 лет.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mainMenu = document.getElementById('main-menu');
+            const form = document.getElementById('request-form');
+            const formSuccess = document.getElementById('form-success');
+            
+            // Page navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    mainMenu.classList.remove('active');
+                    
+                    // Remove active class from all links and pages
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // Add active class to current link
+                    this.classList.add('active');
+                    
+                    // Show corresponding page
+                    const targetPageId = this.getAttribute('href').substring(1);
+                    document.getElementById(targetPageId).classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainMenu.classList.remove('active');
+                });
+            });
+            
+            // Form submission handling (mock Telegram bot integration)
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // In a real implementation, this would send data to a Telegram bot
+                    // For example: fetch('https://api.telegram.org/bot<BOT_TOKEN>/sendMessage', {...})
+                    
+                    // Show success message
+                    formSuccess.style.display = 'block';
+                    form.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        formSuccess.style.display = 'none';
+                    }, 5000);
+                    
+                    // Scroll to success message
+                    formSuccess.scrollIntoView({behavior: 'smooth', block: 'center'});
+                });
+            }
+            
+            // Phone mask
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    
+                    if (value.length > 0) {
+                        value = '+7 (' + value;
+                    }
+                    if (value.length > 4) {
+                        value = value.slice(0, 4) + ') ' + value.slice(4);
+                    }
+                    if (value.length > 9) {
+                        value = value.slice(0, 9) + '-' + value.slice(9);
+                    }
+                    if (value.length > 12) {
+                        value = value.slice(0, 12) + '-' + value.slice(12);
+                    }
+                    if (value.length > 15) {
+                        value = value.slice(0, 15) + '-' + value.slice(15);
+                    }
+                    
+                    e.target.value = value.slice(0, 18);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+```
